@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace XSS_Test
 {
+    /// <summary>
+    /// This class holds all evasionfilter that are to be used in the testing process
+    /// </summary>
     public static class EvasionFilter
     {
         public static List<string> Filter { get; private set; }

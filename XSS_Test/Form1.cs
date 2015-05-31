@@ -87,7 +87,6 @@ namespace XSS_Test
             try
             {
                 // PostHttpClient("http://192.168.2.2/ghost/index.php", null);
-                // Parsing("http://localhost:8099/INTA_labor/index5.html");
                 if (_urlTbClicked)
                 {
                     // TODO: Check Valid URI
@@ -112,11 +111,6 @@ namespace XSS_Test
             tbUrl.Font = new Font(tbUrl.Font, FontStyle.Regular);
             _urlTbClicked = true;
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new EvasionsForm().ShowDialog();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
