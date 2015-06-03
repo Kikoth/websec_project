@@ -32,15 +32,21 @@ namespace XSS_Test
             }
         }
 
+        // Lösche alle selektierten Einträge aus der im Speicher vorhandenen Liste
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (lbxListe.SelectedItems != null)
             {
-                foreach (var item in lbxListe.SelectedItems)
+                List<string> selItems = new List<string>();
+
+                foreach (object item in lbxListe.SelectedItems)
                 {
-                    EvasionFilter.RemoveItem(item.ToString());
+                    selItems.Add(item.ToString());
                 }
 
+                EvasionFilter.RemoveItem(selItems);
+
+                // Refresh der angezeigten Einträge
                 lbxListe.DataSource = null;
                 lbxListe.DataSource = EvasionFilter.Filter;
             }
@@ -100,6 +106,8 @@ namespace XSS_Test
             {
                 EvasionFilter.AddItem(newEvasion);
                 lbxListe.DataSource = null;
+
+                // TODO: Convert EvasionFilterList to String
                 lbxListe.DataSource = EvasionFilter.Filter;
             }
         }
