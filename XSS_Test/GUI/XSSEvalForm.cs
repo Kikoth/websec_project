@@ -13,7 +13,7 @@ namespace XSS_Test
     public partial class XSSEvalForm : Form
     {
         #region Member
-        public delegate void _addListviewItem(ByPassFilterObject byPassObject);
+        public delegate void _addListviewItem(FilterByPassObject byPassObject);
         public _addListviewItem addListViewItem;
 
         public delegate void _updateByPassObjectStatus(int id, string status);
@@ -38,7 +38,7 @@ namespace XSS_Test
         /// Fügt das übergebene ByPassFilterObjekt zur ListView hinzu
         /// </summary>
         /// <param name="byPassObject">Das ByPassObject</param>
-        public void AddListViewItem(ByPassFilterObject byPassObject)
+        public void AddListViewItem(FilterByPassObject byPassObject)
         {
             if (this.byPassListView.InvokeRequired)
             {

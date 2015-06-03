@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XSS_Test
 {
-    public class ByPassFilterObject
+    public class FilterByPassObject
     {
         #region ClassMember
         private static int _idCounter = 0;
@@ -37,12 +37,17 @@ namespace XSS_Test
         #endregion
 
         #region Constructor
-        public ByPassFilterObject(string byPassString)
+        public FilterByPassObject(string byPassString)
         {
             _id = _idCounter++;
             ByPassString = byPassString;
         } 
         #endregion
 
+        #region Member
+
+        // TODO: CRUD ??? Methoden
+
+        #endregion
     }
 }

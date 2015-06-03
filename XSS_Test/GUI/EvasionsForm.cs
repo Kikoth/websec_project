@@ -31,9 +31,9 @@ namespace XSS_Test
             menu = m;
 
 
-            if (EvasionFilter.Filter != null)
+            if (ByPassFilter.Filter != null)
             {
-                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 
@@ -52,11 +52,11 @@ namespace XSS_Test
                     selItems.Add(item.ToString());
                 }
 
-                EvasionFilter.RemoveItem(selItems);
+                ByPassFilter.RemoveItem(selItems);
 
                 // Refresh der angezeigten Einträge
                 lbxListe.DataSource = null;
-                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 
@@ -68,7 +68,7 @@ namespace XSS_Test
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (!(lbxListe.Items.Count > 0))
-                EvasionFilter.ClearList();
+                ByPassFilter.ClearList();
 
             if (!fileSaved)
                 if (DialogResult.Yes == MessageBox.Show("Liste vorm Schließen speichern?", "Liste speichern ...", MessageBoxButtons.YesNoCancel))
@@ -88,18 +88,18 @@ namespace XSS_Test
 
                 // TODO: Liste erweitern oder neu erstellen/andere Datei einlesen?
                 // FilterListe leeren
-                EvasionFilter.ClearList();
+                ByPassFilter.ClearList();
 
                 using (StreamReader sr = new StreamReader(opFiDiagListe.FileName))
                 {
                     while (!sr.EndOfStream)
                     {
-                        EvasionFilter.AddItem(sr.ReadLine());
+                        ByPassFilter.AddItem(sr.ReadLine());
                     }
                 }
 
                 lbxListe.DataSource = null;
-                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 
@@ -120,10 +120,10 @@ namespace XSS_Test
         {
             if (newEvasion != String.Empty)
             {
-                EvasionFilter.AddItem(newEvasion);
+                ByPassFilter.AddItem(newEvasion);
                 lbxListe.DataSource = null;
 
-                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 

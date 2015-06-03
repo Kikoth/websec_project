@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace XSS_Test
 {
-    public static class EvasionFilter
+    public static class ByPassFilter
     {
         #region Member
-        public static List<ByPassFilterObject> Filter { get; private set; }
+        public static List<FilterByPassObject> Filter { get; private set; }
 
         #endregion
         
         #region Constructor
-        static EvasionFilter(){ }
+        static ByPassFilter(){ }
 
         #endregion
 
@@ -30,10 +30,10 @@ namespace XSS_Test
             {
                 if (Filter == null)
                 {
-                    Filter = new List<ByPassFilterObject>();
+                    Filter = new List<FilterByPassObject>();
                 }
 
-                Filter.Add(new ByPassFilterObject(filterByPassString));
+                Filter.Add(new FilterByPassObject(filterByPassString));
             }
         }
 

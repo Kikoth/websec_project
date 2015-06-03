@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace XSS_Test
 {
-    public class ByPassFilterManager
+    public class FilterByPassManager
     {
         #region Member
-        private List<ByPassFilterObject> _byPassObjects = new List<ByPassFilterObject>();
+        private List<FilterByPassObject> _byPassObjects = new List<FilterByPassObject>();
 
-        public List<ByPassFilterObject> ByPassObjectList
+        public List<FilterByPassObject> ByPassObjectList
         {
             get { return _byPassObjects; }
         }
@@ -20,10 +20,10 @@ namespace XSS_Test
         
         
         #region Constructor (Singleton)
-        private static readonly ByPassFilterManager instance = new ByPassFilterManager();
-        private ByPassFilterManager() { }
+        private static readonly FilterByPassManager instance = new FilterByPassManager();
+        private FilterByPassManager() { }
 
-        public ByPassFilterManager GetInstance
+        public FilterByPassManager GetInstance
         {
             get
             {
@@ -36,7 +36,7 @@ namespace XSS_Test
         {
             // Auf bereits vorhandene Filter prüfen. Hier werden erst einmal alle Leerzeichen entfernt. Trim() auf tatsächlichen String
             if (_byPassObjects.Select(x => x.ByPassString.Trim().Equals(byPassString)).Count() == 0)
-                _byPassObjects.Add(new ByPassFilterObject(byPassString.Trim()));
+                _byPassObjects.Add(new FilterByPassObject(byPassString.Trim()));
         }
 
         public void RemoveByPass(string byPassString)

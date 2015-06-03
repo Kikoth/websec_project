@@ -25,7 +25,7 @@ namespace XSS_Test
             this.Hide();
             new EvasionsForm(this).ShowDialog();
 
-            if (EvasionFilter.Filter != null)
+            if (ByPassFilter.Filter != null)
             {
                 btnCheckXSS.Enabled = true;
             }
