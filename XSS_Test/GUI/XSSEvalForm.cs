@@ -107,5 +107,14 @@ namespace XSS_Test
             _mainMenu.Show();}
 
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // TODO: ByPassFIlterObject hinzufügen
+            //foreach (ByPassFilterObject item in EvasionFilter.Filter)
+            //{
+            //    addListViewItem(item);
+            //}
+        }
     }
 }
