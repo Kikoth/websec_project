@@ -107,55 +107,13 @@ namespace XSS_Test
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+  
+        #region MenuStrip EventHandler
+        private void tsMenuTestEnvironment_Click(object sender, EventArgs e)
         {
-            foreach (FilterByPassObject item in ByPassFilter.Filter)
-            {
-                AddListViewItem(item);
-            }
-        }
-
-
-        // Test
-        int[] returned;
-        int i = 0;
-
-        // TEST TEST TEST TEST TEST
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            int next = -1;
-
-            if (returned == null)
-            {
-                returned = new int[ByPassFilter.Filter.Count];
-                for (int j= 0; j < returned.Length; j++)
-                {
-                    returned[j] = -1;
-                }
-            }
-
-            if (i < ByPassFilter.Filter.Count)
-            {
-
-                next = rnd.Next(0, ByPassFilter.Filter.Count);
-
-                while (returned.Contains(next) && (i < ByPassFilter.Filter.Count))
-                {
-                    next = rnd.Next(0, ByPassFilter.Filter.Count);
-                }
-
-                returned[i] = next;
-
-                i++;
-
-                int res = rnd.Next(0, 2);
-
-                SetResult(next, Convert.ToBoolean(res));
-                textBox2.AppendText(i + ": " + next.ToString() + Environment.NewLine);
-            }
-
-               
-        }
+            TestCasesForm testForm = new TestCasesForm(this);
+            testForm.Show();
+        } 
+        #endregion
     }
 }

@@ -81,6 +81,12 @@
     <Compile Include="GUI\XSSEvalForm.Designer.cs">
       <DependentUpon>XSSEvalForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Testing\TestCasesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Testing\TestCasesForm.Designer.cs">
+      <DependentUpon>TestCasesForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="GUI\EvasionsForm.resx">
       <DependentUpon>EvasionsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +108,9 @@
     </Compile>
     <EmbeddedResource Include="GUI\XSSEvalForm.resx">
       <DependentUpon>XSSEvalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Testing\TestCasesForm.resx">
+      <DependentUpon>TestCasesForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
