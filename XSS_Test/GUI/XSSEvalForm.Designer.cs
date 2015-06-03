@@ -29,81 +29,81 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XSSEvalForm));
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tBUri = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gBUri = new System.Windows.Forms.GroupBox();
+            this.gBStatus = new System.Windows.Forms.GroupBox();
             this.byPassListView = new System.Windows.Forms.ListView();
             this.bP_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ByPassFilterString = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FilterByPassString = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gBDetails = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsMenuMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenuTest = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenuTestEnvironment = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.rBUri = new System.Windows.Forms.RadioButton();
+            this.gBAjax = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.gBUri.SuspendLayout();
+            this.gBStatus.SuspendLayout();
+            this.gBDetails.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gBAjax.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tBUri
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(337, 20);
-            this.textBox1.TabIndex = 0;
+            this.tBUri.Location = new System.Drawing.Point(70, 19);
+            this.tBUri.Name = "tBUri";
+            this.tBUri.Size = new System.Drawing.Size(337, 20);
+            this.tBUri.TabIndex = 0;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 19);
+            this.textBox2.Location = new System.Drawing.Point(11, 19);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(143, 470);
+            this.textBox2.Size = new System.Drawing.Size(437, 470);
             this.textBox2.TabIndex = 1;
             // 
-            // listBox1
+            // gBUri
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(16, 56);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(337, 433);
-            this.listBox1.TabIndex = 4;
+            this.gBUri.Controls.Add(this.rBUri);
+            this.gBUri.Controls.Add(this.tBUri);
+            this.gBUri.Location = new System.Drawing.Point(22, 49);
+            this.gBUri.Name = "gBUri";
+            this.gBUri.Size = new System.Drawing.Size(419, 51);
+            this.gBUri.TabIndex = 5;
+            this.gBUri.TabStop = false;
+            this.gBUri.Text = "Website:";
             // 
-            // groupBox1
+            // gBStatus
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Location = new System.Drawing.Point(24, 65);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 503);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.byPassListView);
-            this.groupBox2.Location = new System.Drawing.Point(413, 65);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(668, 503);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.gBStatus.Controls.Add(this.byPassListView);
+            this.gBStatus.Location = new System.Drawing.Point(22, 109);
+            this.gBStatus.Name = "gBStatus";
+            this.gBStatus.Size = new System.Drawing.Size(744, 503);
+            this.gBStatus.TabIndex = 6;
+            this.gBStatus.TabStop = false;
+            this.gBStatus.Text = "Status:";
             // 
             // byPassListView
             // 
             this.byPassListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.bP_ID,
-            this.ByPassFilterString,
+            this.FilterByPassString,
             this.Status,
             this.Result});
+            this.byPassListView.FullRowSelect = true;
+            this.byPassListView.GridLines = true;
             this.byPassListView.Location = new System.Drawing.Point(17, 19);
+            this.byPassListView.MultiSelect = false;
             this.byPassListView.Name = "byPassListView";
-            this.byPassListView.Size = new System.Drawing.Size(630, 470);
+            this.byPassListView.Size = new System.Drawing.Size(707, 470);
             this.byPassListView.TabIndex = 0;
             this.byPassListView.UseCompatibleStateImageBehavior = false;
             this.byPassListView.View = System.Windows.Forms.View.Details;
@@ -113,29 +113,29 @@
             this.bP_ID.Text = "id";
             this.bP_ID.Width = 33;
             // 
-            // ByPassFilterString
+            // FilterByPassString
             // 
-            this.ByPassFilterString.Text = "ByPassFilterString";
-            this.ByPassFilterString.Width = 417;
+            this.FilterByPassString.Text = "FilterByPassString";
+            this.FilterByPassString.Width = 515;
             // 
             // Status
             // 
             this.Status.Text = "Status";
-            this.Status.Width = 115;
+            this.Status.Width = 96;
             // 
             // Result
             // 
             this.Result.Text = "Result";
             // 
-            // groupBox3
+            // gBDetails
             // 
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Location = new System.Drawing.Point(1098, 65);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(172, 503);
-            this.groupBox3.TabIndex = 7;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.gBDetails.Controls.Add(this.textBox2);
+            this.gBDetails.Location = new System.Drawing.Point(795, 109);
+            this.gBDetails.Name = "gBDetails";
+            this.gBDetails.Size = new System.Drawing.Size(458, 503);
+            this.gBDetails.TabIndex = 7;
+            this.gBDetails.TabStop = false;
+            this.gBDetails.Text = "Details";
             // 
             // menuStrip1
             // 
@@ -144,7 +144,7 @@
             this.tsMenuTest});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1293, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1274, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "EvalFormMenuStrip";
             // 
@@ -169,27 +169,80 @@
             this.tsMenuTestEnvironment.Text = "Testumgebung";
             this.tsMenuTestEnvironment.Click += new System.EventHandler(this.tsMenuTestEnvironment_Click);
             // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(642, 68);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(104, 23);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "Start attack";
+            this.btnStart.UseVisualStyleBackColor = true;
+            // 
+            // rBUri
+            // 
+            this.rBUri.AutoSize = true;
+            this.rBUri.Location = new System.Drawing.Point(17, 22);
+            this.rBUri.Name = "rBUri";
+            this.rBUri.Size = new System.Drawing.Size(47, 17);
+            this.rBUri.TabIndex = 2;
+            this.rBUri.TabStop = true;
+            this.rBUri.Text = "URL";
+            this.rBUri.UseVisualStyleBackColor = true;
+            // 
+            // gBAjax
+            // 
+            this.gBAjax.Controls.Add(this.radioButton2);
+            this.gBAjax.Controls.Add(this.textBox4);
+            this.gBAjax.Location = new System.Drawing.Point(795, 49);
+            this.gBAjax.Name = "gBAjax";
+            this.gBAjax.Size = new System.Drawing.Size(298, 51);
+            this.gBAjax.TabIndex = 6;
+            this.gBAjax.TabStop = false;
+            this.gBAjax.Text = "Ajax:";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(17, 22);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(47, 17);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "URL";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(70, 19);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(210, 20);
+            this.textBox4.TabIndex = 0;
+            // 
             // XSSEvalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1293, 615);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1274, 624);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.gBAjax);
+            this.Controls.Add(this.gBDetails);
+            this.Controls.Add(this.gBStatus);
+            this.Controls.Add(this.gBUri);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "XSSEvalForm";
             this.Text = "XSS Evaluation";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.XSSEvalForm_FormClosed);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.gBUri.ResumeLayout(false);
+            this.gBUri.PerformLayout();
+            this.gBStatus.ResumeLayout(false);
+            this.gBDetails.ResumeLayout(false);
+            this.gBDetails.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gBAjax.ResumeLayout(false);
+            this.gBAjax.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,20 +250,24 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tBUri;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gBUri;
+        private System.Windows.Forms.GroupBox gBStatus;
+        private System.Windows.Forms.GroupBox gBDetails;
         private System.Windows.Forms.ListView byPassListView;
         private System.Windows.Forms.ColumnHeader bP_ID;
-        private System.Windows.Forms.ColumnHeader ByPassFilterString;
+        private System.Windows.Forms.ColumnHeader FilterByPassString;
         private System.Windows.Forms.ColumnHeader Status;
         private System.Windows.Forms.ColumnHeader Result;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsMenuMenu;
         private System.Windows.Forms.ToolStripMenuItem tsMenuTest;
         private System.Windows.Forms.ToolStripMenuItem tsMenuTestEnvironment;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.RadioButton rBUri;
+        private System.Windows.Forms.GroupBox gBAjax;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }

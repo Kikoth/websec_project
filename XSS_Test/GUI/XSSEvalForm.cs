@@ -51,7 +51,6 @@ namespace XSS_Test
             }
         } 
 
-
         /// <summary>
         /// Setzt den Statustext für den jeweiligen ByPassFilter
         /// </summary>
@@ -83,17 +82,18 @@ namespace XSS_Test
             }
             else
             {
+                    
+
                 if(res)
                 {
                     byPassListView.Items[id].SubItems[3].Text = "OK";
-                    byPassListView.Items[id].SubItems[3].ForeColor = Color.Green;
-                    byPassListView.Items[id].SubItems[1].BackColor = Color.Green;
+                    byPassListView.Items[id].ForeColor = Color.Green;
                 }
                 else
                 {
                     byPassListView.Items[id].SubItems[3].Text = "failed";
-                    byPassListView.Items[id].SubItems[3].ForeColor = Color.Red;
-                    byPassListView.Items[id].SubItems[1].BackColor = Color.Red;
+                    byPassListView.Items[id].ForeColor = Color.Red;
+
                 }     
             }
         }
@@ -107,7 +107,6 @@ namespace XSS_Test
 
         #endregion
 
-  
         #region MenuStrip EventHandler
         private void tsMenuTestEnvironment_Click(object sender, EventArgs e)
         {

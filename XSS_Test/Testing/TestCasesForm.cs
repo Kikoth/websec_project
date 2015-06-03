@@ -29,12 +29,16 @@ namespace XSS_Test
 
         private void btStartXSSProc_Click(object sender, EventArgs e)
         {
-            foreach (FilterByPassObject item in ByPassFilter.Filter)
+            if (!started)
             {
-                _xSSEvalForm.AddListViewItem(item);
-            }
+                foreach (FilterByPassObject item in ByPassFilter.Filter)
+                {
+                    _xSSEvalForm.AddListViewItem(item);
+                    _xSSEvalForm.UpdateStatus(item.ID, "started");
+                }
 
-            started = true;
+                started = true;
+            }
         }
 
         private void btSimuRetRes_Click(object sender, EventArgs e)
