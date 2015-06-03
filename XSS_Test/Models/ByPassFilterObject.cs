@@ -9,7 +9,7 @@ namespace XSS_Test
     public class ByPassFilterObject
     {
         #region ClassMember
-        private static int _idCounter = 1;
+        private static int _idCounter = 0;
 
         #endregion
 
@@ -36,11 +36,13 @@ namespace XSS_Test
 
         #endregion
 
+        #region Constructor
         public ByPassFilterObject(string byPassString)
         {
             _id = _idCounter++;
             ByPassString = byPassString;
-        }
+        } 
+        #endregion
 
     }
 }

@@ -34,8 +34,14 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.byPassListView = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bP_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ByPassFilterString = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,12 +81,27 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.byPassListView);
             this.groupBox2.Location = new System.Drawing.Point(413, 65);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(668, 503);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
+            // 
+            // byPassListView
+            // 
+            this.byPassListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.bP_ID,
+            this.ByPassFilterString,
+            this.Status,
+            this.Result});
+            this.byPassListView.Location = new System.Drawing.Point(17, 19);
+            this.byPassListView.Name = "byPassListView";
+            this.byPassListView.Size = new System.Drawing.Size(630, 470);
+            this.byPassListView.TabIndex = 0;
+            this.byPassListView.UseCompatibleStateImageBehavior = false;
+            this.byPassListView.View = System.Windows.Forms.View.Details;
             // 
             // groupBox3
             // 
@@ -91,6 +112,25 @@
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
+            // 
+            // bP_ID
+            // 
+            this.bP_ID.Text = "id";
+            this.bP_ID.Width = 33;
+            // 
+            // ByPassFilterString
+            // 
+            this.ByPassFilterString.Text = "ByPassFilterString";
+            this.ByPassFilterString.Width = 417;
+            // 
+            // Status
+            // 
+            this.Status.Text = "Status";
+            this.Status.Width = 115;
+            // 
+            // Result
+            // 
+            this.Result.Text = "Result";
             // 
             // XSSEvalForm
             // 
@@ -105,6 +145,7 @@
             this.Text = "XSS Evaluation";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -119,5 +160,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListView byPassListView;
+        private System.Windows.Forms.ColumnHeader bP_ID;
+        private System.Windows.Forms.ColumnHeader ByPassFilterString;
+        private System.Windows.Forms.ColumnHeader Status;
+        private System.Windows.Forms.ColumnHeader Result;
     }
 }

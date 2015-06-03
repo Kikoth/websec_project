@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByPassFilterManager.cs" />
     <Compile Include="Models\ByPassFilterObject.cs" />
     <Compile Include="Models\EvasionFilter.cs" />
     <Compile Include="GUI\EvasionsForm.cs">
