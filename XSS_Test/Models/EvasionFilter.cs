@@ -9,13 +9,7 @@ namespace XSS_Test
     public static class EvasionFilter
     {
         #region Member
-
-        private static List<ByPassFilterObject> _filter;
-        public static List<ByPassFilterObject> Filter 
-        {
-            get { return _filter; }
-            private set { } 
-        }
+        public static List<ByPassFilterObject> Filter { get; private set; }
 
         #endregion
         
