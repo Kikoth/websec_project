@@ -119,6 +119,7 @@
             this.tsMenuDatei.Name = "tsMenuDatei";
             this.tsMenuDatei.Size = new System.Drawing.Size(46, 20);
             this.tsMenuDatei.Text = "Datei";
+            this.tsMenuDatei.Click += new System.EventHandler(this.tsMenuDatei_Click);
             // 
             // tsMenuDateiOpenFile
             // 

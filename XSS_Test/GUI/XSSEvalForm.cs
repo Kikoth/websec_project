@@ -94,8 +94,7 @@ namespace XSS_Test
                     byPassListView.Items[id].SubItems[3].Text = "failed";
                     byPassListView.Items[id].SubItems[3].ForeColor = Color.Red;
                     byPassListView.Items[id].SubItems[1].BackColor = Color.Red;
-                }
-                
+                }     
             }
         }
 
@@ -110,11 +109,53 @@ namespace XSS_Test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO: ByPassFIlterObject hinzufügen
-            //foreach (ByPassFilterObject item in EvasionFilter.Filter)
-            //{
-            //    addListViewItem(item);
-            //}
+            foreach (FilterByPassObject item in ByPassFilter.Filter)
+            {
+                AddListViewItem(item);
+            }
+        }
+
+
+        // Test
+        int[] returned;
+        int i = 0;
+
+        // TEST TEST TEST TEST TEST
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            int next = -1;
+
+            if (returned == null)
+            {
+                returned = new int[ByPassFilter.Filter.Count];
+                for (int j= 0; j < returned.Length; j++)
+                {
+                    returned[j] = -1;
+                }
+            }
+
+            if (i < ByPassFilter.Filter.Count)
+            {
+
+                next = rnd.Next(0, ByPassFilter.Filter.Count);
+
+                while (returned.Contains(next) && (i < ByPassFilter.Filter.Count))
+                {
+                    next = rnd.Next(0, ByPassFilter.Filter.Count);
+                }
+
+                returned[i] = next;
+
+                i++;
+
+                int res = rnd.Next(0, 2);
+
+                SetResult(next, Convert.ToBoolean(res));
+                textBox2.AppendText(i + ": " + next.ToString() + Environment.NewLine);
+            }
+
+               
         }
     }
 }

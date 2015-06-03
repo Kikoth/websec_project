@@ -56,7 +56,8 @@ namespace XSS_Test
 
                 // Refresh der angezeigten Einträge
                 lbxListe.DataSource = null;
-                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+                if(ByPassFilter.Filter != null)
+                    lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 
@@ -65,12 +66,53 @@ namespace XSS_Test
             menu.Show();
         }
 
+        #endregion
+
+        #region Methods
+        private void AddEvasionString(string newEvasion)
+        {
+            if (newEvasion != String.Empty)
+            {
+                ByPassFilter.AddItem(newEvasion);
+                lbxListe.DataSource = null;
+
+                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+            }
+        }
+
+        private void SaveListToFile()
+        {
+            // TODO: Verschiedene Speicherformate
+            if (openFileName != string.Empty)
+            {
+                // Setze Save-Pfad und Name auf die eingelesene Datei
+                svFiDiagListe.InitialDirectory = openFileName.Substring(0, openFileName.LastIndexOf('\\'));
+                svFiDiagListe.FileName = openFileName.Substring(openFileName.LastIndexOf('\\') + 1);
+
+                if (svFiDiagListe.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    fileSaved = true;
+                }
+            }
+            else
+            {
+                svFiDiagListe.Filter = "Text|*.txt";
+                if (svFiDiagListe.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    fileSaved = true;
+                }
+            }
+
+        } 
+        #endregion
+
+        #region ToolStrip EventHandler
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (!(lbxListe.Items.Count > 0))
                 ByPassFilter.ClearList();
 
-            if (!fileSaved)
+            if (!fileSaved && (lbxListe.Items.Count > 0))
                 if (DialogResult.Yes == MessageBox.Show("Liste vorm Schließen speichern?", "Liste speichern ...", MessageBoxButtons.YesNoCancel))
                 {
                     SaveListToFile();
@@ -81,6 +123,8 @@ namespace XSS_Test
 
         private void tsMenuDateiOpenFile_Click(object sender, EventArgs e)
         {
+            // TODO: verschiedene Eingabeformate
+
             if (opFiDiagListe.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 // FileName speichern
@@ -113,29 +157,15 @@ namespace XSS_Test
             SaveListToFile();
         }
         
-        #endregion
-
-        #region Methods
-        private void AddEvasionString(string newEvasion)
+        private void tsMenuDatei_Click(object sender, EventArgs e)
         {
-            if (newEvasion != String.Empty)
+            if (lbxListe.Items.Count > 0)
             {
-                ByPassFilter.AddItem(newEvasion);
-                lbxListe.DataSource = null;
-
-                lbxListe.DataSource = ByPassFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+                tsMenuDateiSave.Enabled = true;
             }
-        }
-
-        private void SaveListToFile()
-        {
-            // Setze Save-Pfad und Name auf die eingelesene Datei
-            svFiDiagListe.InitialDirectory = openFileName.Substring(0, openFileName.LastIndexOf('\\'));
-            svFiDiagListe.FileName = openFileName.Substring(openFileName.LastIndexOf('\\') + 1);
-
-            if (svFiDiagListe.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            else
             {
-                fileSaved = true;
+                tsMenuDateiSave.Enabled = false;
             }
         } 
         #endregion

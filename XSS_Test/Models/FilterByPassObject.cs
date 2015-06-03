@@ -27,11 +27,6 @@ namespace XSS_Test
         public string ByPassString
         {
             get { return _byPassString; }
-            
-            private set 
-            { 
-                _byPassString = value; 
-            }
         }
 
         #endregion
@@ -40,14 +35,13 @@ namespace XSS_Test
         public FilterByPassObject(string byPassString)
         {
             _id = _idCounter++;
-            ByPassString = byPassString;
+            _byPassString = byPassString;
         } 
         #endregion
 
-        #region Member
+        #region Methods
 
         // TODO: CRUD ??? Methoden
-
         #endregion
     }
 }
