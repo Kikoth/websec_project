@@ -13,10 +13,13 @@ namespace XSS_Test
 {
     public partial class EvasionsForm : Form
     {
+        #region Member
         Menu menu;
         string openFileName = string.Empty;
-        bool fileSaved = false;
+        bool fileSaved = false; 
+        #endregion
 
+        #region Constructor
         public EvasionsForm()
         {
             InitializeComponent();
@@ -26,12 +29,17 @@ namespace XSS_Test
         {
             InitializeComponent();
             menu = m;
+
+
             if (EvasionFilter.Filter != null)
             {
-                lbxListe.DataSource = EvasionFilter.Filter;
+                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 
+        #endregion
+
+        #region EventHandler
         // Lösche alle selektierten Einträge aus der im Speicher vorhandenen Liste
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -48,7 +56,7 @@ namespace XSS_Test
 
                 // Refresh der angezeigten Einträge
                 lbxListe.DataSource = null;
-                lbxListe.DataSource = EvasionFilter.Filter;
+                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
         }
 
@@ -62,7 +70,7 @@ namespace XSS_Test
             if (!(lbxListe.Items.Count > 0))
                 EvasionFilter.ClearList();
 
-            if(!fileSaved)
+            if (!fileSaved)
                 if (DialogResult.Yes == MessageBox.Show("Liste vorm Schließen speichern?", "Liste speichern ...", MessageBoxButtons.YesNoCancel))
                 {
                     SaveListToFile();
@@ -91,8 +99,8 @@ namespace XSS_Test
                 }
 
                 lbxListe.DataSource = null;
-                lbxListe.DataSource = EvasionFilter.Filter;
-            } 
+                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
+            }
         }
 
         private void tsMenuDateiAdd_Click(object sender, EventArgs e)
@@ -100,6 +108,14 @@ namespace XSS_Test
             AddEvasionString(Prompt.ShowDialog("Bitte neuen Filter Evasion eingeben: ", "Hinzufügen..."));
         }
 
+        private void tsMenuDateiSave_Click(object sender, EventArgs e)
+        {
+            SaveListToFile();
+        }
+        
+        #endregion
+
+        #region Methods
         private void AddEvasionString(string newEvasion)
         {
             if (newEvasion != String.Empty)
@@ -107,14 +123,8 @@ namespace XSS_Test
                 EvasionFilter.AddItem(newEvasion);
                 lbxListe.DataSource = null;
 
-                // TODO: Convert EvasionFilterList to String
-                lbxListe.DataSource = EvasionFilter.Filter;
+                lbxListe.DataSource = EvasionFilter.Filter.Select(x => x.ByPassString).ToList<string>();
             }
-        }
-
-        private void tsMenuDateiSave_Click(object sender, EventArgs e)
-        {
-            SaveListToFile();
         }
 
         private void SaveListToFile()
@@ -127,6 +137,7 @@ namespace XSS_Test
             {
                 fileSaved = true;
             }
-        }
+        } 
+        #endregion
     }
 }
