@@ -35,11 +35,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.byPassListView = new System.Windows.Forms.ListView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bP_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ByPassFilterString = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -103,16 +103,6 @@
             this.byPassListView.UseCompatibleStateImageBehavior = false;
             this.byPassListView.View = System.Windows.Forms.View.Details;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Location = new System.Drawing.Point(1098, 65);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(172, 503);
-            this.groupBox3.TabIndex = 7;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
-            // 
             // bP_ID
             // 
             this.bP_ID.Text = "id";
@@ -132,6 +122,16 @@
             // 
             this.Result.Text = "Result";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Location = new System.Drawing.Point(1098, 65);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(172, 503);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
+            // 
             // XSSEvalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,6 +143,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "XSSEvalForm";
             this.Text = "XSS Evaluation";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.XSSEvalForm_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

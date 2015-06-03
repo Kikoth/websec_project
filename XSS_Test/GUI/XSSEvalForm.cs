@@ -12,6 +12,7 @@ namespace XSS_Test
 {
     public partial class XSSEvalForm : Form
     {
+        #region Member
         public delegate void _addListviewItem(ByPassFilterObject byPassObject);
         public _addListviewItem addListViewItem;
 
@@ -20,11 +21,15 @@ namespace XSS_Test
 
         public delegate void _setResult(int id, bool res);
         public _setResult setResult;
+
+        private Menu _mainMenu;
+        #endregion
         
         #region Constructor
-		public XSSEvalForm()
+		public XSSEvalForm(Menu mainMenu)
         {
             InitializeComponent();
+            _mainMenu = mainMenu;
         } 
 	    #endregion
 
@@ -96,5 +101,11 @@ namespace XSS_Test
 
         #endregion
 
+        #region EventHandler
+        private void XSSEvalForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _mainMenu.Show();}
+
+        #endregion
     }
 }

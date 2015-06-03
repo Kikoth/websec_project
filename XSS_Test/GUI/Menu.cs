@@ -34,7 +34,7 @@ namespace XSS_Test
         private void btnCheckXSS_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Form1(this).ShowDialog();
+            new XSSEvalForm(this).ShowDialog();
         }
     }
 }
