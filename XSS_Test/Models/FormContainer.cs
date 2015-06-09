@@ -8,6 +8,33 @@ namespace XSS_Test
 {
     public class FormContainer
     {
+        public string Website { get; set; }
+        public string Method { get; set; }
+        public string Action { get; set; }
+
+        private Dictionary<string, string> _inputs = new Dictionary<string, string>();
+
+        public void SetInputValue(string name, string value)
+        {
+            if (_inputs.ContainsKey(name))
+            {
+                _inputs[name] = value;
+            }
+            else
+            {
+                _inputs.Add(name, value);
+            }
+        }
+
+        public string GetInputValue(string name)
+        {
+            return (_inputs.ContainsKey(name)) ? _inputs[name] : string.Empty;
+        }
+
+
+
+
+
         Dictionary<string, string> attributes = new Dictionary<string, string>();
         List<string> fields = new List<string>();
         string[] _submit;

@@ -116,7 +116,7 @@
             // FilterByPassString
             // 
             this.FilterByPassString.Text = "FilterByPassString";
-            this.FilterByPassString.Width = 515;
+            this.FilterByPassString.Width = 510;
             // 
             // Status
             // 

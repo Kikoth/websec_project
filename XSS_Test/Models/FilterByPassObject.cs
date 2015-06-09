@@ -29,6 +29,12 @@ namespace XSS_Test
             get { return _byPassString; }
         }
 
+        public string ResponseContent
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Constructor
