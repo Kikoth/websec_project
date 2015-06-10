@@ -32,6 +32,7 @@
             this.tBUri = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.gBUri = new System.Windows.Forms.GroupBox();
+            this.rBUri = new System.Windows.Forms.RadioButton();
             this.gBStatus = new System.Windows.Forms.GroupBox();
             this.byPassListView = new System.Windows.Forms.ListView();
             this.bP_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -44,7 +45,6 @@
             this.tsMenuTest = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenuTestEnvironment = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStart = new System.Windows.Forms.Button();
-            this.rBUri = new System.Windows.Forms.RadioButton();
             this.gBAjax = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -80,6 +80,17 @@
             this.gBUri.TabIndex = 5;
             this.gBUri.TabStop = false;
             this.gBUri.Text = "Website:";
+            // 
+            // rBUri
+            // 
+            this.rBUri.AutoSize = true;
+            this.rBUri.Location = new System.Drawing.Point(17, 22);
+            this.rBUri.Name = "rBUri";
+            this.rBUri.Size = new System.Drawing.Size(47, 17);
+            this.rBUri.TabIndex = 2;
+            this.rBUri.TabStop = true;
+            this.rBUri.Text = "URL";
+            this.rBUri.UseVisualStyleBackColor = true;
             // 
             // gBStatus
             // 
@@ -177,17 +188,7 @@
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Start attack";
             this.btnStart.UseVisualStyleBackColor = true;
-            // 
-            // rBUri
-            // 
-            this.rBUri.AutoSize = true;
-            this.rBUri.Location = new System.Drawing.Point(17, 22);
-            this.rBUri.Name = "rBUri";
-            this.rBUri.Size = new System.Drawing.Size(47, 17);
-            this.rBUri.TabIndex = 2;
-            this.rBUri.TabStop = true;
-            this.rBUri.Text = "URL";
-            this.rBUri.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // gBAjax
             // 

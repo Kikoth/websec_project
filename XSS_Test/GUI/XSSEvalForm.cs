@@ -114,5 +114,12 @@ namespace XSS_Test
             testForm.Show();
         } 
         #endregion
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            AttackProcess _aProc = new AttackProcess(this);
+
+            var res = _aProc.GetFormContainer("http://192.168.2.2/ghost/index.php");
+        }
     }
 }

@@ -8,33 +8,72 @@ namespace XSS_Test
 {
     public class FormContainer
     {
-        public string Website { get; set; }
-        public string Method { get; set; }
-        public string Action { get; set; }
+        #region Member
+        public string Website { get; private set; }
 
-        private Dictionary<string, string> _inputs = new Dictionary<string, string>();
+        public string Method { get; private set; }
+    
+        public string Action { get; private set; }
 
-        public void SetInputValue(string name, string value)
+        public void SetAttributeValue(string name, string value)
         {
-            if (_inputs.ContainsKey(name))
+            switch (name.ToLower())
             {
-                _inputs[name] = value;
-            }
-            else
-            {
-                _inputs.Add(name, value);
+                 // wenn action leer, dann vermutlich self-calling und attack geht gegen original Website
+                case "action":
+                    {
+                        string _host = Website.Substring(0, Website.Length - (Website.Length - Website.LastIndexOf('/')) + 1);
+                        Action = (value == String.Empty || value == null) ? Website : _host + value;
+                    }
+                    break;
+                case "method":
+                    Method = value;
+                    break;
+                default:
+                    break;
             }
         }
 
-        public string GetInputValue(string name)
+
+        private List<string> _inputs = new List<string>();
+
+        public void AddInput(string name)
         {
-            return (_inputs.ContainsKey(name)) ? _inputs[name] : string.Empty;
+            if (!_inputs.Contains(name) && name != "undefined")
+            {
+                _inputs.Add(name);
+            }
         }
 
+        #endregion
+        
+        
+        #region Constructor
+
+        public FormContainer() { }
+
+        public FormContainer(string website)
+        {
+            Website = website;
+        }
+
+        public FormContainer CopyNew()
+        {
+            FormContainer _copy = new FormContainer(Website);
+            _copy.Action = this.Action;
+            _copy.Method = this.Method;
+
+            foreach (string item in _inputs)
+            {
+                _copy.AddInput(item);
+            }
+   
+            return _copy;
+        }
+        #endregion
 
 
-
-
+        #region OldVersion
         Dictionary<string, string> attributes = new Dictionary<string, string>();
         List<string> fields = new List<string>();
         string[] _submit;
@@ -90,5 +129,8 @@ namespace XSS_Test
 
             return _copy;
         }
+
+        #endregion
+
     }
 }
