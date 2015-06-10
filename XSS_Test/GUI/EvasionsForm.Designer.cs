@@ -154,6 +154,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "EvasionsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EvasionsForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EvasionsForm_FormClosed);
             this.gbListe.ResumeLayout(false);

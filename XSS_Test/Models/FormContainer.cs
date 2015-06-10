@@ -34,7 +34,6 @@ namespace XSS_Test
             }
         }
 
-
         private List<string> _inputs = new List<string>();
 
         public void AddInput(string name)
@@ -43,6 +42,11 @@ namespace XSS_Test
             {
                 _inputs.Add(name);
             }
+        }
+
+        public List<string> GetInputs()
+        {
+            return _inputs;
         }
 
         #endregion

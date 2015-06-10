@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -115,11 +116,32 @@ namespace XSS_Test
         } 
         #endregion
 
+        // Starte die Attacke und danach dann die Analyse
         private void btnStart_Click(object sender, EventArgs e)
         {
-            AttackProcess _aProc = new AttackProcess(this);
+            // Sorgt dafür, dass erst dann Details angezeigt werden, wenn die Daten auch wirklich vorliegen
+            TaskScheduler _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-            var res = _aProc.GetFormContainer("http://192.168.2.2/ghost/index.php");
+            Task.Factory.StartNew(() =>
+            {
+                new AttackProcessing(this).CommitAttack(tBUri.Text);
+            }).ContinueWith(ant => Analyzation() , _uiScheduler);
+        }
+
+        // Starte die Analyse
+        private void Analyzation()
+        {
+            new Analyzer(this).PerformAnalyzation();
+        }
+
+        private void byPassListView_ItemSelectionChanged_1(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            foreach (var item in byPassListView.SelectedItems)
+            {
+                string t = new string(item.ToString().Where(c => char.IsDigit(c)).ToArray());
+
+                tbDetails.Text = ByPassFilter.Filter.Single(x => x.ID == Convert.ToInt32(t)).ResponseContent;
+            }
         }
     }
 }

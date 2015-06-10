@@ -1,0 +1,25 @@
+﻿        // Führe einen initialen Request gegen die zu attackierende Seite aus
+        private async void InitialRequest(string website)
+        {
+            // Listencontainer aller Nodes
+            List<HtmlNode> docNodeList;
+
+            HttpClient http = new HttpClient();
+
+            try
+            {
+                var response = await http.GetByteArrayAsync(website);
+                String source = Encoding.GetEncoding("utf-8").GetString(response, 0, response.Length - 1);
+                source = WebUtility.HtmlDecode(source);
+                HtmlAgilityPack.HtmlDocument result = new HtmlAgilityPack.HtmlDocument();
+                result.LoadHtml(source);
+                docNodeList = result.DocumentNode.Descendants().ToList();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            // Erstelle FormContainer
+            FilterFormContainer(docNodeList, website);
+        }

@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XSSEvalForm));
             this.tBUri = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbDetails = new System.Windows.Forms.TextBox();
             this.gBUri = new System.Windows.Forms.GroupBox();
             this.rBUri = new System.Windows.Forms.RadioButton();
             this.gBStatus = new System.Windows.Forms.GroupBox();
@@ -61,14 +61,16 @@
             this.tBUri.Name = "tBUri";
             this.tBUri.Size = new System.Drawing.Size(337, 20);
             this.tBUri.TabIndex = 0;
+            this.tBUri.Text = "http://192.168.2.2/ghost/index.php";
             // 
-            // textBox2
+            // tbDetails
             // 
-            this.textBox2.Location = new System.Drawing.Point(11, 19);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(437, 470);
-            this.textBox2.TabIndex = 1;
+            this.tbDetails.Location = new System.Drawing.Point(11, 19);
+            this.tbDetails.Multiline = true;
+            this.tbDetails.Name = "tbDetails";
+            this.tbDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbDetails.Size = new System.Drawing.Size(437, 470);
+            this.tbDetails.TabIndex = 1;
             // 
             // gBUri
             // 
@@ -118,6 +120,7 @@
             this.byPassListView.TabIndex = 0;
             this.byPassListView.UseCompatibleStateImageBehavior = false;
             this.byPassListView.View = System.Windows.Forms.View.Details;
+            this.byPassListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.byPassListView_ItemSelectionChanged_1);
             // 
             // bP_ID
             // 
@@ -140,7 +143,7 @@
             // 
             // gBDetails
             // 
-            this.gBDetails.Controls.Add(this.textBox2);
+            this.gBDetails.Controls.Add(this.tbDetails);
             this.gBDetails.Location = new System.Drawing.Point(795, 109);
             this.gBDetails.Name = "gBDetails";
             this.gBDetails.Size = new System.Drawing.Size(458, 503);
@@ -172,6 +175,7 @@
             this.tsMenuTest.Name = "tsMenuTest";
             this.tsMenuTest.Size = new System.Drawing.Size(41, 20);
             this.tsMenuTest.Text = "Test";
+            this.tsMenuTest.Visible = false;
             // 
             // tsMenuTestEnvironment
             // 
@@ -233,6 +237,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "XSSEvalForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XSS Evaluation";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.XSSEvalForm_FormClosed);
             this.gBUri.ResumeLayout(false);
@@ -252,7 +257,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox tBUri;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbDetails;
         private System.Windows.Forms.GroupBox gBUri;
         private System.Windows.Forms.GroupBox gBStatus;
         private System.Windows.Forms.GroupBox gBDetails;

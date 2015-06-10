@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace XSS_Test
@@ -9,6 +10,7 @@ namespace XSS_Test
     public class MainController
     {
         Menu _mainMenu;
+        XSSEvalForm xssForm;
 
         public MainController()
         {
