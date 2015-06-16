@@ -51,8 +51,8 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\Analyzer.cs" />
     <Compile Include="BusinessLogic\AttackProcessing.cs" />
-    <Compile Include="FilterByPassManager.cs" />
-    <Compile Include="MainController.cs" />
+    <Compile Include="UpComing\FilterByPassManager.cs" />
+    <Compile Include="UpComing\MainController.cs" />
     <Compile Include="Models\FilterByPassObject.cs" />
     <Compile Include="Models\ByPassFilter.cs" />
     <Compile Include="GUI\EvasionsForm.cs">
@@ -61,14 +61,7 @@
     <Compile Include="GUI\EvasionsForm.Designer.cs">
       <DependentUpon>EvasionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\FormContainer.cs" />
-    <Compile Include="BusinessLogic\HTMLProcessing.cs" />
     <Compile Include="GUI\Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,9 +85,6 @@
     </Compile>
     <EmbeddedResource Include="GUI\EvasionsForm.resx">
       <DependentUpon>EvasionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

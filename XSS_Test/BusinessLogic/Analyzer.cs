@@ -54,9 +54,7 @@ namespace XSS_Test
             // Set Result und Ende
             _responseForm.SetResult(byPassObject.ID, success);
             _responseForm.UpdateStatus(byPassObject.ID, "...done");
-
         }
-
 
         #endregion
 
