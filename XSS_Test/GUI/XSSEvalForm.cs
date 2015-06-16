@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -119,13 +115,36 @@ namespace XSS_Test
         // Starte die Attacke und danach dann die Analyse
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // Sorgt dafür, dass erst dann Details angezeigt werden, wenn die Daten auch wirklich vorliegen
-            TaskScheduler _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            // TODO: Cache und Views rücksetzen
 
-            Task.Factory.StartNew(() =>
+            bool br = false;
+
+            WebRequest webRequest = WebRequest.Create(tBUri.Text);
+            WebResponse webResponse;
+            try
             {
-                new AttackProcessing(this).CommitAttack(tBUri.Text);
-            }).ContinueWith(ant => Analyzation() , _uiScheduler);
+                webResponse = webRequest.GetResponse();
+                br = true;
+            }
+            catch //If exception thrown then couldn't get response from address
+            {
+                br = false;
+            }
+
+            if (br)
+            {
+                // Sorgt dafür, dass erst dann Details angezeigt werden, wenn die Daten auch wirklich vorliegen
+                TaskScheduler _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+
+                Task.Factory.StartNew(() =>
+                {
+                    new AttackProcessing(this).CommitAttack(tBUri.Text);
+                }).ContinueWith(ant => Analyzation(), _uiScheduler);
+            }
+            else
+            {
+                MessageBox.Show("Url ist falsch oder existiert nicht");
+            }
         }
 
         // Starte die Analyse

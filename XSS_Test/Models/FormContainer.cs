@@ -49,6 +49,21 @@ namespace XSS_Test
             return _inputs;
         }
 
+        string[] _submit;
+
+        public void AddSubmit(string name, string value)
+        {
+            if (_submit == null)
+                _submit = new string[2];
+
+            _submit[0] = name;
+            _submit[1] = value;
+        }
+
+        public string[] GetSubmit()
+        {
+            return _submit;
+        }
         #endregion
         
         

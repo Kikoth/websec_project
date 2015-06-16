@@ -86,6 +86,7 @@
             // rBUri
             // 
             this.rBUri.AutoSize = true;
+            this.rBUri.Checked = true;
             this.rBUri.Location = new System.Drawing.Point(17, 22);
             this.rBUri.Name = "rBUri";
             this.rBUri.Size = new System.Drawing.Size(47, 17);
@@ -198,12 +199,14 @@
             // 
             this.gBAjax.Controls.Add(this.radioButton2);
             this.gBAjax.Controls.Add(this.textBox4);
+            this.gBAjax.Enabled = false;
             this.gBAjax.Location = new System.Drawing.Point(795, 49);
             this.gBAjax.Name = "gBAjax";
             this.gBAjax.Size = new System.Drawing.Size(298, 51);
             this.gBAjax.TabIndex = 6;
             this.gBAjax.TabStop = false;
             this.gBAjax.Text = "Ajax:";
+            this.gBAjax.Visible = false;
             // 
             // radioButton2
             // 

@@ -57,5 +57,16 @@ namespace XSS_Test
             Filter = null;
         }
         #endregion
+
+        /// <summary>
+        /// Setzt die gespeicherten Responses jedes einzelnen FilterObjektes zurück
+        /// </summary>
+        public static void ClearAllResponses()
+        {
+            foreach (var item in Filter)
+            {
+                item.ResponseContent = string.Empty;
+            }
+        }
     }        
 }

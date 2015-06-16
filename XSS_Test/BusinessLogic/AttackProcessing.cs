@@ -13,14 +13,14 @@ namespace XSS_Test
 {
     public class AttackProcessing
     {
-                #region Members
+        #region Members
 
         private XSSEvalForm _responseForm;
         private FormContainer _frmContainer;
         private readonly List<FormContainer> _formTags = new List<FormContainer>();
 
         bool _formTagOpen = false;
-	    #endregion
+        #endregion
 
         #region Constructor
 
@@ -58,7 +58,7 @@ namespace XSS_Test
             List<HtmlNode> docNodeList;
 
             WebClient http = new WebClient();
-            
+
             try
             {
                 String response = http.DownloadString(website);
@@ -120,6 +120,12 @@ namespace XSS_Test
                     {
                         _frmContainer.AddInput(node.GetAttributeValue("name", "undefined"));
                     }
+
+                    // Submit in FormContainer speichern
+                    if (node.GetAttributeValue("type", "undefined").ToLower() == "submit")
+                    {
+                        _frmContainer.AddSubmit(node.GetAttributeValue("name", "undefined"), node.GetAttributeValue("value", "undefined"));
+                    }
                 }
             }
 
@@ -157,7 +163,7 @@ namespace XSS_Test
 
         public async Task<string> POSTAttack(FilterByPassObject byPassObject, FormContainer item)
         {
-           // Update Status des FilterByPassObject (Logging)
+            // Update Status des FilterByPassObject (Logging)
             _responseForm.UpdateStatus(byPassObject.ID, "running request...");
 
             string[] inputs = item.GetInputs().ToArray<string>();
@@ -172,7 +178,8 @@ namespace XSS_Test
                     {
                         foreach (string input in inputs)
                         {
-                            values.Add(input, byPassObject.ByPassString);
+                            if (input.ToLower() != "submit")
+                                values.Add(input, byPassObject.ByPassString);
                         }
                     }
                 }
@@ -182,10 +189,10 @@ namespace XSS_Test
                 }
 
 
-                // TODO: Submit??!!!
-                //string[] submit = item.GetSubmit();
-                //if (submit != null)
-                //    values.Add(submit[0], submit[1]);
+                // Submit gesetzt? bei Self-Calling Sites
+                string[] submit = item.GetSubmit();
+                if (submit != null)
+                    values.Add(submit[0], submit[1]);
 
                 var content = new FormUrlEncodedContent(values);
 
@@ -196,7 +203,7 @@ namespace XSS_Test
 
 
                 // Das FilterByPassObject selbst aktualisieren
-                byPassObject.ResponseContent = response.ToString() + Environment.NewLine + response.RequestMessage + Environment.NewLine  + await response.Content.ReadAsStringAsync();
+                byPassObject.ResponseContent = response.ToString() + Environment.NewLine + response.RequestMessage + Environment.NewLine + await response.Content.ReadAsStringAsync();
 
                 return "d";
             }

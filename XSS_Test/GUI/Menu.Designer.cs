@@ -74,6 +74,7 @@
             this.btnSqlInjection.TabIndex = 3;
             this.btnSqlInjection.Text = "SQL Injection";
             this.btnSqlInjection.UseVisualStyleBackColor = true;
+            this.btnSqlInjection.Visible = false;
             // 
             // Menu
             // 
