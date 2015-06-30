@@ -77,8 +77,8 @@ namespace XSS_Test
 
         private void FilterFormContainer(List<HtmlNode> docNodeList, string website)
         {
-            // Valide InputTags zur weiteren Verarbeitung
-            IEnumerable<string> validInputTags = new List<string>() { "text", "password", "submit" };
+            // Valide InputTags zur weiteren Verarbeitung --> DEBUG: "submit entfernt"
+            IEnumerable<string> validInputTags = new List<string>() { "text", "password" };
 
             // Valide FormTags zur weiteren Verarbeitung
             IEnumerable<string> validFormTags = new List<string>() { "action", "method" };
